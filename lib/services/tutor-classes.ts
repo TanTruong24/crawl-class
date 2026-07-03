@@ -70,7 +70,7 @@ export function parseTutorClasses(html: string, baseUrl: string): TutorClass[] {
   return dedupeByClassKey(parsedClasses);
 }
 
-function extractInfoMap($: cheerio.CheerioAPI, item: cheerio.Cheerio<unknown>) {
+function extractInfoMap($: cheerio.CheerioAPI, item: any) {
   const infoMap = new Map<string, string>();
 
   item.find(tutorClassSelectors.infoParagraphs).each((_, paragraph) => {
