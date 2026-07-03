@@ -5,7 +5,8 @@ export type RequiredEnvKey =
   | "SUPABASE_SERVICE_ROLE_KEY"
   | "RESEND_API_KEY"
   | "EMAIL_FROM"
-  | "EMAIL_TO";
+  | "EMAIL_TO"
+  | "NOTIFICATION_SUBJECT_KEYWORDS";
 
 export function getRequiredEnv(key: RequiredEnvKey): string {
   const value = process.env[key];
@@ -46,4 +47,20 @@ export function getEmailConfig() {
     emailFrom: getRequiredEnv("EMAIL_FROM"),
     emailTo: getRequiredEnv("EMAIL_TO"),
   };
+}
+
+export function getNotificationSubjectKeywords() {
+  const rawValue = getRequiredEnv("NOTIFICATION_SUBJECT_KEYWORDS");
+  const keywords = rawValue
+    .split(",")
+    .map((keyword) => keyword.trim())
+    .filter(Boolean);
+
+  if (keywords.length === 0) {
+    throw new Error(
+      "Environment variable NOTIFICATION_SUBJECT_KEYWORDS must contain at least one keyword",
+    );
+  }
+
+  return keywords;
 }

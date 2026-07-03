@@ -1,8 +1,8 @@
+import { getNotificationSubjectKeywords } from "@/lib/config/env";
 import type { TutorClass } from "@/lib/types/tutor-class";
 
-const notificationSubjectKeywords = ["lap trinh", "tin hoc"];
-
 export function shouldNotifyForClass(tutorClass: TutorClass) {
+  const notificationSubjectKeywords = getNotificationSubjectKeywords().map(normalizeVietnameseText);
   const searchableText = normalizeVietnameseText(
     [tutorClass.subject, tutorClass.title, tutorClass.rawText].filter(Boolean).join(" "),
   );
