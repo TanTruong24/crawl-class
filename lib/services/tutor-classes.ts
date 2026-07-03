@@ -73,7 +73,7 @@ export function parseTutorClasses(html: string, baseUrl: string): TutorClass[] {
 function extractInfoMap($: cheerio.CheerioAPI, item: any) {
   const infoMap = new Map<string, string>();
 
-  item.find(tutorClassSelectors.infoParagraphs).each((_, paragraph) => {
+  item.find(tutorClassSelectors.infoParagraphs).each((_: number, paragraph: unknown) => {
     const paragraphNode = $(paragraph);
     const value = normalizeText(paragraphNode.find(tutorClassSelectors.infoValue).first().text());
 
