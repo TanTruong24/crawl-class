@@ -74,7 +74,7 @@ function extractInfoMap($: cheerio.CheerioAPI, item: any) {
   const infoMap = new Map<string, string>();
 
   item.find(tutorClassSelectors.infoParagraphs).each((_: number, paragraph: unknown) => {
-    const paragraphNode = $(paragraph);
+    const paragraphNode = $(paragraph as any);
     const value = normalizeText(paragraphNode.find(tutorClassSelectors.infoValue).first().text());
 
     if (!value) {
